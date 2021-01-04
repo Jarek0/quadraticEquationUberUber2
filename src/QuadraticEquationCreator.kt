@@ -42,17 +42,17 @@ object QuadraticEquationCreator {
 
     private fun createViaParametrizedConstructor(): QuadraticEquation {
         val a = readFactor("a")
+        if(!isValid(a)) throw InvalidQuadraticEquationFirstFactorValueException()
         val b = readFactor("b")
         val c = readFactor("c")
         return QuadraticEquation(a, b, c)
     }
 
     private fun createViaNotParametrizedConstructor(): QuadraticEquation {
-        val equation = QuadraticEquation()
-        equation.setA()
-        equation.setB()
-        equation.setC()
-        return equation
+        val a = readFactor("a")
+        val b = readFactor("b")
+        val c = readFactor("c")
+        return QuadraticEquation.create(a, b, c)
     }
 
 }

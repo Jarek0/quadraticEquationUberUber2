@@ -5,18 +5,9 @@ import java.math.BigDecimal
 
 class QuadraticEquation {
 
-    var a: BigDecimal
-    set(value) {
-        if(!isValid(value)) throw InvalidQuadraticEquationFirstFactorValueException()
-        field = value
-    }
-    get
-    var b: BigDecimal
-    set
-    get
-    var c: BigDecimal
-    set
-    get
+    private var a: BigDecimal
+    private var b: BigDecimal
+    private var c: BigDecimal
 
     constructor(a: BigDecimal, b: BigDecimal, c: BigDecimal) {
         this.a = a
@@ -30,19 +21,6 @@ class QuadraticEquation {
         this.c = BigDecimal.ZERO
     }
 
-    fun setA() {
-        val a = readFactor("a")
-        this.a = a
-    }
-
-    fun setB() {
-        this.b = readFactor("b")
-    }
-
-    fun setC() {
-        this.c = readFactor("b")
-    }
-
     fun solve() {
         val discriminant = Discriminant(a, b, c)
         val solutionFinder = create(discriminant)
@@ -50,4 +28,15 @@ class QuadraticEquation {
     }
 
     override fun toString() = "$a*x^2 + $b*x + $c = 0"
+
+    companion object {
+        fun create(a: BigDecimal, b: BigDecimal, c: BigDecimal): QuadraticEquation {
+            if(!isValid(a)) throw InvalidQuadraticEquationFirstFactorValueException()
+            val equation = QuadraticEquation()
+            equation.a = a
+            equation.b = b
+            equation.c = c
+            return equation
+        }
+    }
 }

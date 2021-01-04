@@ -26,7 +26,7 @@ object QuadraticEquationCreator {
                 }
             }
             catch (e: Exception) {
-                println("Podaleś wartość. Spróbuj ponownie!")
+                println("Podaleś nieprawidłową wartość. Spróbuj ponownie!")
             }
         } while (createdEquation == null)
         return createdEquation

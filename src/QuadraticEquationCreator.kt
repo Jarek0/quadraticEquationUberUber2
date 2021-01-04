@@ -7,34 +7,41 @@ import java.util.*
 object QuadraticEquationCreator {
 
     fun create(): QuadraticEquation {
-        var createdEquation: QuadraticEquation? = null
+        val creatorKind = creatorKind()
+        if(creatorKind == CREATE_VIA_PARAMETRIZED_CONSTRUCTOR) {
+            return createViaParametrizedConstructor()
+        }
+        else if (creatorKind == CREATE_VIA_NOT_PARAMETRIZED_CONSTRUCTOR) {
+            return createViaNotParametrizedConstructor()
+        }
+        else {
+            throw RuntimeException("Nieprawidłowy sposób tworzenia równania kwadratowego")
+        }
+    }
+
+    private fun creatorKind(): String {
+        var wayOfCreation: String? = null
         do {
             println("Jak chcesz stworzyć równanie kwadratowe?")
             println("wpisz 1 aby stworzyć je przez konstruktor parametryzowany")
             println("wpisz 2 aby stworzyć je przez konstruktor nie parametryzowany")
             val input = Scanner(System.`in`)
             try {
-                val wayOfCreation = input.nextLine()
-                if(wayOfCreation == CREATE_VIA_PARAMETRIZED_CONSTRUCTOR) {
-                    createdEquation = createViaParametrizedConstructor()
-                }
-                else if (wayOfCreation == CREATE_VIA_NOT_PARAMETRIZED_CONSTRUCTOR) {
-                    createdEquation = createViaNotParametrizedConstructor()
-                }
-                else {
+                val aInput = input.nextLine()
+                if(!listOf(CREATE_VIA_PARAMETRIZED_CONSTRUCTOR, CREATE_VIA_NOT_PARAMETRIZED_CONSTRUCTOR).contains(aInput)) {
                     throw RuntimeException("Nieprawidłowy sposób tworzenia równania kwadratowego")
                 }
+                wayOfCreation = aInput
             }
             catch (e: Exception) {
                 println("Podaleś nieprawidłową wartość. Spróbuj ponownie!")
             }
-        } while (createdEquation == null)
-        return createdEquation
+        } while (wayOfCreation == null)
+        return wayOfCreation
     }
 
     private fun createViaParametrizedConstructor(): QuadraticEquation {
         val a = readFactor("a")
-        if(!isValid(a)) throw InvalidQuadraticEquationFirstFactorValueException()
         val b = readFactor("b")
         val c = readFactor("c")
         return QuadraticEquation(a, b, c)

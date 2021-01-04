@@ -6,8 +6,9 @@ import java.math.BigDecimal
 class QuadraticEquation {
 
     var a: BigDecimal
-    set(a) {
-        if(!isValid(a)) throw InvalidQuadraticEquationFirstFactorValueException()
+    set(value) {
+        if(!isValid(value)) throw InvalidQuadraticEquationFirstFactorValueException()
+        field = value
     }
     get
     var b: BigDecimal
@@ -24,7 +25,7 @@ class QuadraticEquation {
     }
 
     constructor() {
-        this.a = BigDecimal.ZERO
+        this.a = BigDecimal.ONE
         this.b = BigDecimal.ZERO
         this.c = BigDecimal.ZERO
     }

@@ -41,11 +41,11 @@ object QuadraticEquationCreator {
     }
 
     private fun createViaNotParametrizedConstructor(): QuadraticEquation {
-        val a = readFactor("a")
-        if(!isValid(a)) throw InvalidQuadraticEquationFirstFactorValueException()
-        val b = readFactor("b")
-        val c = readFactor("c")
-        return QuadraticEquation.create(a, b, c)
+        val equation = QuadraticEquation()
+        equation.setA()
+        equation.setB()
+        equation.setC()
+        return equation
     }
 
 }
